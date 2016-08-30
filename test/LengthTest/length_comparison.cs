@@ -6,31 +6,10 @@ namespace OOBootCampTest
 {
     public class length_comparison
     {
-        [Fact]
-        public void should_be_equal_when_two_lengths_have_same_unit_and_quantity()
-        {
-            var left = new Length(1, "m");
-            var right = new Length(1, "m");
-
-            (left.Equals(right)).Should().BeTrue();
-            (left == right).Should().BeTrue();
-            (left != right).Should().BeFalse();
-            (left <= right).Should().BeTrue();
-            (left >= right).Should().BeTrue();
-        }
-
-        [Fact]
-        public void should_be_inequal_when_two_lengths_have_same_unit_but_different_quantity()
-        {
-            var left = new Length(10, "m");
-            var right = new Length(1, "m");
-
-            (left.Equals(right)).Should().BeFalse();
-            (left == right).Should().BeFalse();
-            (left != right).Should().BeTrue();
-        }
-
         [Theory]
+        [InlineData(1, "m", 1, "m")]
+        [InlineData(1, "cm", 1, "cm")]
+        [InlineData(1, "mm", 1, "mm")]
         [InlineData(1, "m", 100, "cm")]
         [InlineData(2, "m", 2000, "mm")]
         [InlineData(3, "cm", 30, "mm")]
@@ -46,9 +25,14 @@ namespace OOBootCampTest
             (left.Equals(right)).Should().BeTrue();
             (left == right).Should().BeTrue();
             (left != right).Should().BeFalse();
+            (left <= right).Should().BeTrue();
+            (left >= right).Should().BeTrue();
         }
 
         [Theory]
+        [InlineData(1, "m", 10, "m")]
+        [InlineData(1, "cm", 10, "cm")]
+        [InlineData(1, "mm", 10, "mm")]
         [InlineData(1, "m", 200, "cm")]
         [InlineData(2, "m", 3000, "mm")]
         [InlineData(3, "cm", 40, "mm")]
