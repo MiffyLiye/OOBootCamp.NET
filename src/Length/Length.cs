@@ -2,7 +2,7 @@ using System;
 
 namespace OOBootCamp
 {
-    public class Length
+    public class Length : IEquatable<Length>
     {
         private readonly decimal _quantity;
         private readonly LengthUnits _unit;
@@ -10,10 +10,7 @@ namespace OOBootCamp
         public Length(decimal quantity, string unit)
         {
             _quantity = quantity;
-            if (!LengthUnits.TryParse(unit, true, out _unit))
-            {
-                throw new InvalidOperationException($"Length unit {unit} not supported.");
-            }
+            _unit = (LengthUnits) Enum.Parse(typeof(LengthUnits), unit, false);
         }
 
         public override string ToString()
@@ -21,35 +18,39 @@ namespace OOBootCamp
             return $"{_quantity} {_unit}";
         }
 
-        protected bool Equals(Length other)
+        public bool Equals(Length other)
         {
-            return _quantity == other._quantity && _unit == other._unit;
+            return this.ToMeter() == other.ToMeter();
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Length) obj);
+            return obj.GetType() == this.GetType() && Equals((Length) obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return (_quantity.GetHashCode() * 397) ^ (int) _unit;
+                return ToMeter().GetHashCode();
             }
         }
 
         public static bool operator ==(Length left, Length right)
         {
-            return left.Equals(right);
+            return !ReferenceEquals(left, null) && left.Equals(right);
         }
 
         public static bool operator !=(Length left, Length right)
         {
             return !(left == right);
+        }
+
+        private decimal ToMeter()
+        {
+            return _quantity * _unit.ToMeter();
         }
     }
 }
