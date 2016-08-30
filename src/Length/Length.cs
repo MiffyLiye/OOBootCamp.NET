@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace OOBootCamp
 {
-    public class Length : IEquatable<Length>
+    public class Length : IEquatable<Length>, IComparable<Length>, IComparable
     {
         private readonly decimal _quantity;
         private readonly LengthUnits _unit;
@@ -30,6 +30,17 @@ namespace OOBootCamp
             return obj.GetType() == this.GetType() && Equals((Length) obj);
         }
 
+        public int CompareTo(Length other)
+        {
+            return ToMeter().CompareTo(other.ToMeter());
+        }
+
+
+        public int CompareTo(object obj)
+        {
+            return ToMeter().CompareTo(((Length) obj).ToMeter());
+        }
+
         public override int GetHashCode()
         {
             unchecked
@@ -46,6 +57,26 @@ namespace OOBootCamp
         public static bool operator !=(Length left, Length right)
         {
             return !(left == right);
+        }
+
+        public static bool operator <(Length left, Length right)
+        {
+            return left.CompareTo(right) == -1;
+        }
+
+        public static bool operator >(Length left, Length right)
+        {
+            return left.CompareTo(right) == 1;
+        }
+
+        public static bool operator <=(Length left, Length right)
+        {
+            return !(left > right);
+        }
+
+        public static bool operator >=(Length left, Length right)
+        {
+            return !(left < right);
         }
 
         private decimal ToMeter()
