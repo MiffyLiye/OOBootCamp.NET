@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace OOBootCamp
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum LengthUnits
     {
-        [ToMeter("1")]
-        m,
-        [ToMeter("0.01")]
-        cm,
-        [ToMeter("0.001")]
-        mm
+        [ToMeter("1")] m,
+        [ToMeter("0.01")] cm,
+        [ToMeter("0.001")] mm
     }
 
     [AttributeUsage(AttributeTargets.Field)]
@@ -27,7 +26,8 @@ namespace OOBootCamp
 
     public static class LengthUnitsExtension
     {
-        private static readonly ConcurrentDictionary<LengthUnits, decimal> ratio = new ConcurrentDictionary<LengthUnits, decimal>();
+        private static readonly ConcurrentDictionary<LengthUnits, decimal> ratio =
+            new ConcurrentDictionary<LengthUnits, decimal>();
 
         public static decimal ToMeter(this LengthUnits unit)
         {

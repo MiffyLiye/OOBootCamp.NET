@@ -4,7 +4,8 @@ using OOBootCamp;
 
 namespace OOBootCampTest
 {
-    public class length_description{
+    public class length_description
+    {
         [Theory]
         [InlineData(1, "m", "1 m")]
         [InlineData(2, "m", "2 m")]

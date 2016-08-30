@@ -55,11 +55,12 @@ namespace OOBootCampTest
         [InlineData(1, "m", 200, "cm")]
         [InlineData(2, "m", 3000, "mm")]
         [InlineData(3, "cm", 40, "mm")]
-        public void should_be_the_shorter_when_one_length_has_smaller_quantity_than_the_other_length_after_converted_to_m(
-            decimal leftQuantity,
-            string leftUnit,
-            decimal rightQuantity,
-            string rightUnit)
+        public void
+            should_be_the_shorter_when_one_length_has_smaller_quantity_than_the_other_length_after_converted_to_m(
+                decimal leftQuantity,
+                string leftUnit,
+                decimal rightQuantity,
+                string rightUnit)
         {
             var left = new Length(leftQuantity, leftUnit);
             var right = new Length(rightQuantity, rightUnit);
