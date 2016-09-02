@@ -24,6 +24,7 @@ namespace OOBootCampTest
 
             (left.Equals(right)).Should().BeTrue();
             (left == right).Should().BeTrue();
+            (left.CompareTo(right)).Should().Be(0);
             (left != right).Should().BeFalse();
             (left <= right).Should().BeTrue();
             (left >= right).Should().BeTrue();
