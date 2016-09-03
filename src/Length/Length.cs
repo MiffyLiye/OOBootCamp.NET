@@ -2,7 +2,7 @@
 
 namespace OOBootCamp
 {
-    public class Length : IEquatable<Length>, IComparable<Length>, IComparable
+    public struct Length : IEquatable<Length>, IComparable<Length>, IComparable
     {
         private readonly decimal _quantity;
         private readonly LengthUnits _unit;
@@ -25,9 +25,7 @@ namespace OOBootCamp
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == this.GetType() && Equals((Length) obj);
+            return obj is Length && Equals((Length) obj);
         }
 
         public int CompareTo(Length other)
@@ -35,23 +33,19 @@ namespace OOBootCamp
             return ToMeter().CompareTo(other.ToMeter());
         }
 
-
         public int CompareTo(object obj)
         {
-            return ToMeter().CompareTo(((Length) obj).ToMeter());
+            return CompareTo((Length) obj);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return ToMeter().GetHashCode();
-            }
+            return ToMeter().GetHashCode();
         }
 
         public static bool operator ==(Length left, Length right)
         {
-            return !ReferenceEquals(left, null) && left.Equals(right);
+            return left.Equals(right);
         }
 
         public static bool operator !=(Length left, Length right)
