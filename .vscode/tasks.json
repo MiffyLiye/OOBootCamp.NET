@@ -15,7 +15,7 @@
         {
             "suppressTaskName": true,
             "taskName": "build",
-            "args": ["dotnet build */*"],
+            "args": ["find src\/ -name project.json -exec dotnet build {} \\;"],
             "isBuildCommand": true,
             "isTestCommand": false,
             "problemMatcher": "$msCompile"
@@ -23,7 +23,7 @@
         {
             "suppressTaskName": true,
             "taskName": "test",
-            "args": ["dotnet test test/*"],
+            "args": ["find test\/ -name project.json -exec dotnet test {} \\;"],
             "isBuildCommand": false,
             "isTestCommand": true,
             "problemMatcher": "$msCompile"
@@ -31,7 +31,7 @@
         {
             "suppressTaskName": true,
             "taskName": "package",
-            "args": ["dotnet pack -c Release src/*/project.json"],
+            "args": ["find src\/ -name project.json -exec dotnet pack -c Release {} \\;"],
             "isBuildCommand": false,
             "isTestCommand": false,
             "problemMatcher": "$msCompile"
