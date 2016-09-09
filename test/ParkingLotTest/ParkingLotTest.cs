@@ -10,7 +10,7 @@ namespace OOBootCampTest
         [Fact]
         public void should_pick_the_same_car_after_parked_car()
         {
-            var parkingLot = new ParkingLot(2);
+            var parkingLot = new ParkingLot(1);
             var car = new Car();
 
             var token = parkingLot.Park(car);
@@ -44,20 +44,6 @@ namespace OOBootCampTest
             parkingLot.Invoking(p => p.Park(new Car()))
                 .ShouldThrow<InvalidOperationException>()
                 .WithMessage("No space.");
-        }
-
-        [Fact]
-        public void should_park_successfully_after_picked_one_car_from_full_parking_lot()
-        {
-            var parkingLot = new ParkingLot(1);
-            var otherToken = parkingLot.Park(new Car());
-            parkingLot.Pick(otherToken);
-
-            var car = new Car();
-            var token = parkingLot.Park(car);
-
-            var pickedCar = parkingLot.Pick(token);
-            pickedCar.Should().BeSameAs(car);
         }
 
         [Fact]
