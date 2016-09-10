@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OOBootCamp
 {
     public class ParkingBoy
     {
-        private readonly ParkingLot[] _parkingLots;
+        private readonly ICollection<ParkingLot> _parkingLots;
+
         public ParkingBoy(params ParkingLot[] parkingLots)
         {
             _parkingLots = parkingLots;

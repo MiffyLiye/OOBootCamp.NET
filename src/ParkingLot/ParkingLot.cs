@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace OOBootCamp
 {
-    public class Car
-    {
-    }
-
     public class ParkingLot
     {
         private readonly Dictionary<string, Car> _lot = new Dictionary<string, Car>();
@@ -14,12 +10,17 @@ namespace OOBootCamp
 
         public ParkingLot(int capacity)
         {
-            this._capacity = capacity;
+            _capacity = capacity;
+        }
+
+        public bool CanPark()
+        {
+            return HasEmptySpace();
         }
 
         public string Park(Car car)
         {
-            if (_lot.Count >= _capacity)
+            if (!HasEmptySpace())
             {
                 throw new InvalidOperationException("No space.");
             }
@@ -28,9 +29,14 @@ namespace OOBootCamp
             return token;
         }
 
+        public bool CanPick(string token)
+        {
+            return IsCarInLot(token);
+        }
+
         public Car Pick(string token)
         {
-            if (!_lot.ContainsKey(token))
+            if (!IsCarInLot(token))
             {
                 throw new InvalidOperationException("Not found.");
             }
@@ -39,12 +45,12 @@ namespace OOBootCamp
             return car;
         }
 
-        public bool CanPark()
+        private bool HasEmptySpace()
         {
-            return !(_lot.Count >= _capacity);
+            return _lot.Count < _capacity;
         }
 
-        public bool CanPick(string token)
+        private bool IsCarInLot(string token)
         {
             return _lot.ContainsKey(token);
         }
