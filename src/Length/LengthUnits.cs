@@ -26,20 +26,18 @@ namespace OOBootCamp
 
     public static class LengthUnitsExtension
     {
-        private static readonly ConcurrentDictionary<LengthUnits, decimal> ratio =
+        private static readonly ConcurrentDictionary<LengthUnits, decimal> Ratio =
             new ConcurrentDictionary<LengthUnits, decimal>();
 
         public static decimal ToMeter(this LengthUnits unit)
         {
-            if (ratio.ContainsKey(unit))
+            if (Ratio.ContainsKey(unit))
             {
-                return ratio[unit];
+                return Ratio[unit];
             }
 
-            var fieldInfo = unit.GetType().GetField(unit.ToString());
-
-            var attribute = fieldInfo.GetCustomAttribute<ToMeter>();
-            ratio.GetOrAdd(unit, attribute.Meter);
+            var attribute = unit.GetType().GetField(Enum.GetName(typeof(LengthUnits), unit)).GetCustomAttribute<ToMeter>();
+            Ratio.GetOrAdd(unit, attribute.Meter);
 
             return attribute.Meter;
         }
