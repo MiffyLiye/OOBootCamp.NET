@@ -8,13 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Length", "src\Length\Length.xproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Length", "src\Length\Length.xproj", "{96d8ed5a-61ed-4ba2-8ed3-a19225dd75ac}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LengthTest", "test\LengthTest\LengthTest.xproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "LengthTest", "test\LengthTest\LengthTest.xproj", "{a7a40cbb-572e-4f0d-924d-c019ad9cd74b}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ParkingLot", "src\ParkingLot\ParkingLot.xproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ParkingLot", "src\ParkingLot\ParkingLot.xproj", "{8bb794d6-7789-4cb7-a0ab-d5c4ac9b7a1b}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ParkingLotTest", "test\ParkingLotTest\ParkingLotTest.xproj", "{00000000-0000-0000-0000-000000000000}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ParkingLotTest", "test\ParkingLotTest\ParkingLotTest.xproj", "{16986b70-c5fb-4913-baf4-dbe3af06e1a3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
