@@ -41,7 +41,12 @@ namespace OOBootCamp
 
         public bool CanPark()
         {
-            return _lot.Count < _capacity;
+            return !(_lot.Count >= _capacity);
+        }
+
+        public bool CanPick(string token)
+        {
+            return _lot.ContainsKey(token);
         }
     }
 }

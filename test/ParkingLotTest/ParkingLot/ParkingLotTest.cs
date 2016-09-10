@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using OOBootCamp;
+using ParkingLotTest.Utilities;
 using Xunit;
 
 namespace OOBootCampTest
@@ -38,8 +39,10 @@ namespace OOBootCampTest
         [Fact]
         public void should_park_unsucccessfully_when_parking_lot_is_full()
         {
-            var parkingLot = new ParkingLot(1);
-            parkingLot.Park(new Car());
+            var parkingLot = new ParkingLotBuilder()
+                .WithCapacity(1)
+                .WithOccupiedParkingSpace(1)
+                .Create();
 
             parkingLot.Invoking(p => p.Park(new Car()))
                 .ShouldThrow<InvalidOperationException>()
