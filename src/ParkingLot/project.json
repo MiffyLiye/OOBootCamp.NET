@@ -5,6 +5,9 @@
     "emitEntryPoint": false,
     "warningsAsErrors": true
   },
+  "dependencies": {
+      "MoreLinq.Core": "1.4.0-*"
+  },
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {

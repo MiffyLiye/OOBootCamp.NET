@@ -45,6 +45,8 @@ namespace OOBootCamp
             return car;
         }
 
+        public int EmptySpacesCount => _capacity - _lot.Count;
+
         private bool HasEmptySpace()
         {
             return _lot.Count < _capacity;
