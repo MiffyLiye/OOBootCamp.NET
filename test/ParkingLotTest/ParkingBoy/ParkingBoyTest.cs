@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using OOBootCamp;
 using ParkingLotTest.Utilities;
 using Xunit;
@@ -65,6 +66,31 @@ namespace OOBootCampTest
             var pickedCar = parkingBoy.Pick(token);
 
             pickedCar.Should().BeSameAs(car);
+        }
+
+        [Fact]
+        public void should_not_park_car_when_all_managed_parking_lots_are_full()
+        {
+            var parkingLot = new ParkingLotBuilder()
+                .WithCapacity(1)
+                .WithOccupiedParkingSpace(1)
+                .Create();
+            var parkingBoy = new ParkingBoy(parkingLot);
+
+            parkingBoy.Invoking(p => p.Park(new Car()))
+                .ShouldThrow<InvalidOperationException>()
+                .WithMessage("Cannot park at this moment.");
+        }
+
+        [Fact]
+        public void should_not_pick_car_when_the_car_is_not_in_parking_lot()
+        {
+            var parkingBoy = new ParkingBoy(new ParkingLot(1));
+            var token = Guid.NewGuid().ToString();
+
+            parkingBoy.Invoking(p => p.Pick(token))
+                .ShouldThrow<InvalidOperationException>()
+                .WithMessage("Cannot find the car.");
         }
     }
 }

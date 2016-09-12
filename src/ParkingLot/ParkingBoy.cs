@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OOBootCamp
@@ -14,12 +15,27 @@ namespace OOBootCamp
 
         public string Park(Car car)
         {
-            return _parkingLots.First(p => p.CanPark()).Park(car);
+            var parkingLot = _parkingLots.FirstOrDefault(p => p.CanPark());
+            if (parkingLot == null)
+            {
+                throw new InvalidOperationException("Cannot park at this moment.");
+            }
+            return parkingLot.Park(car);
+        }
+
+        public bool CanPark()
+        {
+            return _parkingLots.Any(p => p.CanPark());
         }
 
         public Car Pick(string token)
         {
-            return _parkingLots.First(p => p.CanPick(token)).Pick(token);
+            var parkingLot = _parkingLots.FirstOrDefault(p => p.CanPick(token));
+            if (parkingLot == null)
+            {
+                throw new InvalidOperationException("Cannot find the car.");
+            }
+            return parkingLot.Pick(token);
         }
     }
 }
