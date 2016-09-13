@@ -6,12 +6,13 @@ namespace OOBootCamp
 {
     public class ParkingLot
     {
-        private readonly Dictionary<string, Car> _lot = new Dictionary<string, Car>();
-        private readonly int _capacity;
+        private Dictionary<string, Car> OccupiedLots { get; }
+        private int Capacity { get; }
 
         public ParkingLot(int capacity)
         {
-            _capacity = capacity;
+            OccupiedLots = new Dictionary<string, Car>();
+            Capacity = capacity;
         }
 
         public bool CanPark()
@@ -26,7 +27,7 @@ namespace OOBootCamp
                 throw new ParkingFailedException("No space.");
             }
             var token = Guid.NewGuid().ToString();
-            _lot.Add(token, car);
+            OccupiedLots.Add(token, car);
             return token;
         }
 
@@ -41,21 +42,21 @@ namespace OOBootCamp
             {
                 throw new CarNotFoundException("Not found.");
             }
-            var car = _lot[token];
-            _lot.Remove(token);
+            var car = OccupiedLots[token];
+            OccupiedLots.Remove(token);
             return car;
         }
 
-        public int EmptySpacesCount => _capacity - _lot.Count;
+        public int EmptySpacesCount => Capacity - OccupiedLots.Count;
 
         private bool HasEmptySpace()
         {
-            return _lot.Count < _capacity;
+            return OccupiedLots.Count < Capacity;
         }
 
         private bool IsCarInLot(string token)
         {
-            return _lot.ContainsKey(token);
+            return OccupiedLots.ContainsKey(token);
         }
     }
 }
