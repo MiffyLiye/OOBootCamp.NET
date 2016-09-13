@@ -1,21 +1,19 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using OOBootCamp.Exceptions;
 
-namespace OOBootCamp.Abilities
+namespace OOBootCamp
 {
-    internal class ParkingLotAgentAbility
+    public abstract class ParkingAgent
     {
         private ICollection<ParkingLot> ParkingLots { get; }
-        private Func<ICollection<ParkingLot>, ParkingLot> SelectParkingLot { get; }
 
-        public ParkingLotAgentAbility(ICollection<ParkingLot> parkingLots,
-            Func<ICollection<ParkingLot>, ParkingLot> selectParkingLot)
+        protected ParkingAgent(ICollection<ParkingLot> parkingLots)
         {
             ParkingLots = parkingLots;
-            SelectParkingLot = selectParkingLot;
         }
+
+        protected abstract ParkingLot SelectParkingLot(ICollection<ParkingLot> parkingLots);
 
         public bool CanPark()
         {

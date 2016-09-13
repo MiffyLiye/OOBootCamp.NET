@@ -1,38 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OOBootCamp.Abilities;
 
 namespace OOBootCamp
 {
-    public class ParkingBoy
+    public class ParkingBoy : ParkingAgent
     {
-        private ICollection<ParkingLot> ParkingLots { get; }
-        private ParkingLotAgentAbility ParkingLotAgentAbility { get; }
-
-        public ParkingBoy(params ParkingLot[] parkingLots)
+        public ParkingBoy(params ParkingLot[] parkingLots) : base(parkingLots)
         {
-            ParkingLots = parkingLots;
-            ParkingLotAgentAbility = new ParkingLotAgentAbility(ParkingLots, ps => ps.First(p => p.CanPark()));
         }
 
-        public bool CanPark()
+        protected override ParkingLot SelectParkingLot(ICollection<ParkingLot> parkingLots)
         {
-            return ParkingLotAgentAbility.CanPark();
-        }
-
-        public string Park(Car car)
-        {
-            return ParkingLotAgentAbility.Park(car);
-        }
-
-        public bool CanPick(string token)
-        {
-            return ParkingLotAgentAbility.CanPick(token);
-        }
-
-        public Car Pick(string token)
-        {
-            return ParkingLotAgentAbility.Pick(token);
+            return parkingLots.First(p => p.CanPark());
         }
     }
 }
