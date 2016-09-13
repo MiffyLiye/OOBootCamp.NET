@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using OOBootCamp;
+using OOBootCamp.Exceptions;
 using ParkingLotTest.Utilities;
 using Xunit;
 
@@ -78,7 +79,7 @@ namespace OOBootCampTest
             var parkingBoy = new ParkingBoy(parkingLot);
 
             parkingBoy.Invoking(p => p.Park(new Car()))
-                .ShouldThrow<InvalidOperationException>()
+                .ShouldThrow<NoSpaceException>()
                 .WithMessage("Cannot park at this moment.");
         }
 
@@ -89,7 +90,7 @@ namespace OOBootCampTest
             var token = Guid.NewGuid().ToString();
 
             parkingBoy.Invoking(p => p.Pick(token))
-                .ShouldThrow<InvalidOperationException>()
+                .ShouldThrow<NotFoundException>()
                 .WithMessage("Cannot find the car.");
         }
     }

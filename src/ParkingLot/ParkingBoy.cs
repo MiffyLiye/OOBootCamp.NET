@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
@@ -18,7 +19,7 @@ namespace OOBootCamp
             var parkingLot = _parkingLots.FirstOrDefault(p => p.CanPark());
             if (parkingLot == null)
             {
-                throw new InvalidOperationException("Cannot park at this moment.");
+                throw new NoSpaceException("Cannot park at this moment.");
             }
             return parkingLot.Park(car);
         }
@@ -33,7 +34,7 @@ namespace OOBootCamp
             var parkingLot = _parkingLots.FirstOrDefault(p => p.CanPick(token));
             if (parkingLot == null)
             {
-                throw new InvalidOperationException("Cannot find the car.");
+                throw new NotFoundException("Cannot find the car.");
             }
             return parkingLot.Pick(token);
         }

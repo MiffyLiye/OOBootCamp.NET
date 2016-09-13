@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
@@ -22,7 +23,7 @@ namespace OOBootCamp
         {
             if (!HasEmptySpace())
             {
-                throw new InvalidOperationException("No space.");
+                throw new NoSpaceException("No space.");
             }
             var token = Guid.NewGuid().ToString();
             _lot.Add(token, car);
@@ -38,7 +39,7 @@ namespace OOBootCamp
         {
             if (!IsCarInLot(token))
             {
-                throw new InvalidOperationException("Not found.");
+                throw new NotFoundException("Not found.");
             }
             var car = _lot[token];
             _lot.Remove(token);

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using OOBootCamp;
+using OOBootCamp.Exceptions;
 using ParkingLotTest.Utilities;
 using Xunit;
 
@@ -45,7 +46,7 @@ namespace OOBootCampTest
                 .Create();
 
             parkingLot.Invoking(p => p.Park(new Car()))
-                .ShouldThrow<InvalidOperationException>()
+                .ShouldThrow<NoSpaceException>()
                 .WithMessage("No space.");
         }
 
@@ -58,7 +59,7 @@ namespace OOBootCampTest
             parkingLot.Pick(token);
 
             parkingLot.Invoking(p => p.Pick(token))
-                .ShouldThrow<InvalidOperationException>()
+                .ShouldThrow<NotFoundException>()
                 .WithMessage("Not found.");
         }
 
@@ -69,7 +70,7 @@ namespace OOBootCampTest
             var invalidToken = Guid.NewGuid().ToString();
 
             parkingLot.Invoking(p => p.Pick(invalidToken))
-                .ShouldThrow<InvalidOperationException>()
+                .ShouldThrow<NotFoundException>()
                 .WithMessage("Not found.");
         }
     }
