@@ -46,7 +46,7 @@ namespace OOBootCampTest
                 .Create();
 
             parkingLot.Invoking(p => p.Park(new Car()))
-                .ShouldThrow<NoSpaceException>()
+                .ShouldThrow<ParkingFailedException>()
                 .WithMessage("No space.");
         }
 
@@ -59,7 +59,7 @@ namespace OOBootCampTest
             parkingLot.Pick(token);
 
             parkingLot.Invoking(p => p.Pick(token))
-                .ShouldThrow<NotFoundException>()
+                .ShouldThrow<CarNotFoundException>()
                 .WithMessage("Not found.");
         }
 
@@ -70,7 +70,7 @@ namespace OOBootCampTest
             var invalidToken = Guid.NewGuid().ToString();
 
             parkingLot.Invoking(p => p.Pick(invalidToken))
-                .ShouldThrow<NotFoundException>()
+                .ShouldThrow<CarNotFoundException>()
                 .WithMessage("Not found.");
         }
     }

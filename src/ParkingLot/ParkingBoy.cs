@@ -15,7 +15,7 @@ namespace OOBootCamp
             var parkingLot = ParkingLots.FirstOrDefault(p => p.CanPark());
             if (parkingLot == null)
             {
-                throw new NoSpaceException("Cannot park at this moment.");
+                throw new ParkingFailedException("Cannot park at this moment.");
             }
             return parkingLot.Park(car);
         }

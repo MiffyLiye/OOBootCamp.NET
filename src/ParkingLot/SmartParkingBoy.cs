@@ -13,7 +13,7 @@ namespace OOBootCamp
         {
             if (!CanPark())
             {
-                throw new NoSpaceException("Cannot park at this moment.");
+                throw new ParkingFailedException("Cannot park at this moment.");
             }
             return ParkingLots.MaxBy(p => p.EmptySpacesCount).Park(car);
         }

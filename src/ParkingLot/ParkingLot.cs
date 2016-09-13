@@ -23,7 +23,7 @@ namespace OOBootCamp
         {
             if (!HasEmptySpace())
             {
-                throw new NoSpaceException("No space.");
+                throw new ParkingFailedException("No space.");
             }
             var token = Guid.NewGuid().ToString();
             _lot.Add(token, car);
@@ -39,7 +39,7 @@ namespace OOBootCamp
         {
             if (!IsCarInLot(token))
             {
-                throw new NotFoundException("Not found.");
+                throw new CarNotFoundException("Not found.");
             }
             var car = _lot[token];
             _lot.Remove(token);

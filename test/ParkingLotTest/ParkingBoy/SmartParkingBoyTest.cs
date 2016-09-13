@@ -50,7 +50,7 @@ namespace OOBootCampTest
             var smartParkingBoy = new SmartParkingBoy(parkingLot);
 
             smartParkingBoy.Invoking(p => p.Park(new Car()))
-                .ShouldThrow<NoSpaceException>()
+                .ShouldThrow<ParkingFailedException>()
                 .WithMessage("Cannot park at this moment.");
         }
 
@@ -61,7 +61,7 @@ namespace OOBootCampTest
             var token = Guid.NewGuid().ToString();
 
             smartParkingBoy.Invoking(p => p.Pick(token))
-                .ShouldThrow<NotFoundException>()
+                .ShouldThrow<CarNotFoundException>()
                 .WithMessage("Cannot find the car.");
         }
     }

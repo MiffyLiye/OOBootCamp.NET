@@ -30,7 +30,7 @@ namespace OOBootCamp
             var parkingLot = ParkingLots.FirstOrDefault(p => p.CanPick(token));
             if (parkingLot == null)
             {
-                throw new NotFoundException("Cannot find the car.");
+                throw new CarNotFoundException("Cannot find the car.");
             }
             return parkingLot.Pick(token);
         }
