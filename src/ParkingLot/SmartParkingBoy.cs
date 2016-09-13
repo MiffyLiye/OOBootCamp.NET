@@ -1,42 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MoreLinq;
+﻿using MoreLinq;
 using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
-    public class SmartParkingBoy
+    public class SmartParkingBoy : ParkingPerson
     {
-        private readonly ICollection<ParkingLot> _parkingLots;
-
-        public SmartParkingBoy(params ParkingLot[] parkingLots)
+        public SmartParkingBoy(params ParkingLot[] parkingLots) : base(parkingLots)
         {
-            _parkingLots = parkingLots;
         }
 
-        public string Park(Car car)
+        public override string Park(Car car)
         {
             if (!CanPark())
             {
                 throw new NoSpaceException("Cannot park at this moment.");
             }
-            return _parkingLots.MaxBy(p => p.EmptySpacesCount).Park(car);
-        }
-
-        public bool CanPark()
-        {
-            return _parkingLots.Any(p => p.CanPark());
-        }
-
-        public Car Pick(string token)
-        {
-            var parkingLot = _parkingLots.FirstOrDefault(p => p.CanPick(token));
-            if (parkingLot == null)
-            {
-                throw new NotFoundException("Cannot find the car.");
-            }
-            return parkingLot.Pick(token);
+            return ParkingLots.MaxBy(p => p.EmptySpacesCount).Park(car);
         }
     }
 }
