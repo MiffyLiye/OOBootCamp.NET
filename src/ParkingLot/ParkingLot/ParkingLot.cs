@@ -7,7 +7,7 @@ namespace OOBootCamp
     public class ParkingLot
     {
         private Dictionary<string, Car> OccupiedLots { get; }
-        private int Capacity { get; }
+        public int Capacity { get; }
 
         public ParkingLot(int capacity)
         {
