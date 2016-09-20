@@ -4,16 +4,18 @@ using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
-    public class ParkingLot
+    public class ParkingLot : IParkable
     {
         private Dictionary<string, Car> OccupiedLots { get; }
-        public int Capacity { get; }
+        private int Capacity { get; }
 
         public ParkingLot(int capacity)
         {
             OccupiedLots = new Dictionary<string, Car>();
             Capacity = capacity;
         }
+
+        public decimal VacancyRate => (decimal) EmptySpacesCount / Capacity;
 
         public bool CanPark()
         {

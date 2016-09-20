@@ -4,20 +4,20 @@ using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
-    public abstract class ParkingAgent
+    public abstract class ParkingAgent<TManaged> : IParkable where TManaged: IParkable
     {
-        private ICollection<ParkingLot> ParkingLots { get; }
+        private ICollection<TManaged> Parkables { get; }
 
-        protected ParkingAgent(ICollection<ParkingLot> parkingLots)
+        protected ParkingAgent(ICollection<TManaged> parkables)
         {
-            ParkingLots = parkingLots;
+            Parkables = parkables;
         }
 
-        protected abstract ParkingLot SelectParkingLot(ICollection<ParkingLot> parkingLots);
+        protected abstract TManaged SelectParkable(ICollection<TManaged> parkingLots);
 
         public bool CanPark()
         {
-            return ParkingLots.Any(p => p.CanPark());
+            return Parkables.Any(p => p.CanPark());
         }
 
         public string Park(Car car)
@@ -26,17 +26,17 @@ namespace OOBootCamp
             {
                 throw new ParkingFailedException("Cannot park at this moment.");
             }
-            return SelectParkingLot(ParkingLots).Park(car);
+            return SelectParkable(Parkables).Park(car);
         }
 
         public bool CanPick(string token)
         {
-            return ParkingLots.Any(p => p.CanPick(token));
+            return Parkables.Any(p => p.CanPick(token));
         }
 
         public Car Pick(string token)
         {
-            var parkingLot = ParkingLots.FirstOrDefault(p => p.CanPick(token));
+            var parkingLot = Parkables.FirstOrDefault(p => p.CanPick(token));
             if (parkingLot == null)
             {
                 throw new CarNotFoundException("Cannot find the car.");

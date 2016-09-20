@@ -3,13 +3,13 @@ using MoreLinq;
 
 namespace OOBootCamp
 {
-    public class SmartParkingBoy : ParkingAgent
+    public class SmartParkingBoy : ParkingAgent<ParkingLot>
     {
-        public SmartParkingBoy(params ParkingLot[] parkingLots) : base(parkingLots)
+        public SmartParkingBoy(params ParkingLot[] parkables) : base(parkables)
         {
         }
 
-        protected override ParkingLot SelectParkingLot(ICollection<ParkingLot> parkingLots)
+        protected override ParkingLot SelectParkable(ICollection<ParkingLot> parkingLots)
         {
             return parkingLots.MaxBy(p => p.EmptySpacesCount);
         }
