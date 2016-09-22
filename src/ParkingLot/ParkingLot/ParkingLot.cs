@@ -60,5 +60,7 @@ namespace OOBootCamp
         {
             return OccupiedLots.ContainsKey(token);
         }
+
+        public ParkingReport ParkingReport => new ParkingReport("P", Capacity - EmptySpacesCount, Capacity);
     }
 }

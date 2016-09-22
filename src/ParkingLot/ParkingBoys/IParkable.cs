@@ -1,6 +1,6 @@
 ﻿namespace OOBootCamp
 {
-    public interface IParkable
+    public interface IParkable : IParkingReportable
     {
         bool CanPark();
         string Park(Car car);

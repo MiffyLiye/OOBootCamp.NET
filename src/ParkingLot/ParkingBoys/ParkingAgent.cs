@@ -4,7 +4,7 @@ using OOBootCamp.Exceptions;
 
 namespace OOBootCamp
 {
-    public abstract class ParkingAgent<TManaged> : IParkable where TManaged: IParkable
+    public abstract class ParkingAgent<TManaged> : IParkable where TManaged : IParkable
     {
         private ICollection<TManaged> Parkables { get; }
 
@@ -42,6 +42,17 @@ namespace OOBootCamp
                 throw new CarNotFoundException("Cannot find the car.");
             }
             return parkingLot.Pick(token);
+        }
+
+        protected abstract string RoleInReport { get; }
+
+        public ParkingReport ParkingReport
+        {
+            get
+            {
+                var subReports = Parkables.Select(i => i.ParkingReport).ToList();
+                return new ParkingReport(RoleInReport, subReports);
+            }
         }
     }
 }
