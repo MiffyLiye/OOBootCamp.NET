@@ -14,6 +14,6 @@ namespace OOBootCamp
             return parkingLots.MaxBy(p => p.VacancyRate);
         }
 
-        protected override string RoleInReport { get; } = "B";
+        protected override string RoleInReport => ParkingRoles.SuperParkingBoy;
     }
 }

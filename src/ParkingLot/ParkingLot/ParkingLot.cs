@@ -15,7 +15,7 @@ namespace OOBootCamp
             Capacity = capacity;
         }
 
-        public decimal VacancyRate => (decimal) EmptySpacesCount / Capacity;
+        public decimal VacancyRate => (decimal)EmptySpacesCount / Capacity;
 
         public bool CanPark()
         {
@@ -61,6 +61,6 @@ namespace OOBootCamp
             return OccupiedLots.ContainsKey(token);
         }
 
-        public ParkingReport ParkingReport => new ParkingReport("P", Capacity - EmptySpacesCount, Capacity);
+        public ParkingReport ParkingReport => new ParkingReport(ParkingRoles.ParkingLot, Capacity - EmptySpacesCount, Capacity);
     }
 }
