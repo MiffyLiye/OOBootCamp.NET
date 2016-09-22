@@ -27,8 +27,9 @@ namespace OOBootCampTest
                 .Create();
             var parkingManager = new ParkingManager(parkingLot);
 
-            parkingManager.ParkingReport.ToString().Should().Be("M 1 2" + NewLine +
-                                                 "  P 1 2");
+            parkingManager.ParkingReport.ToString().Should().Be(
+                "M 1 2" + NewLine +
+                "  P 1 2");
         }
 
         [Fact]
@@ -41,9 +42,10 @@ namespace OOBootCampTest
             var parkingBoy = new ParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
 
-            parkingManager.ParkingReport.ToString().Should().Be("M 1 2" + NewLine +
-                                                 "  B 1 2" + NewLine +
-                                                 "    P 1 2");
+            parkingManager.ParkingReport.ToString().Should().Be(
+                "M 1 2" + NewLine +
+                "  B 1 2" + NewLine +
+                "    P 1 2");
         }
 
         [Fact]
@@ -56,9 +58,10 @@ namespace OOBootCampTest
             var parkingBoy = new SmartParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
 
-            parkingManager.ParkingReport.ToString().Should().Be("M 1 2" + NewLine +
-                                                 "  B 1 2" + NewLine +
-                                                 "    P 1 2");
+            parkingManager.ParkingReport.ToString().Should().Be(
+                "M 1 2" + NewLine +
+                "  B 1 2" + NewLine +
+                "    P 1 2");
         }
 
         [Fact]
@@ -71,9 +74,10 @@ namespace OOBootCampTest
             var parkingBoy = new SuperParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
 
-            parkingManager.ParkingReport.ToString().Should().Be("M 1 2" + NewLine +
-                                                 "  B 1 2" + NewLine +
-                                                 "    P 1 2");
+            parkingManager.ParkingReport.ToString().Should().Be(
+                "M 1 2" + NewLine +
+                "  B 1 2" + NewLine +
+                "    P 1 2");
         }
 
         [Fact]
