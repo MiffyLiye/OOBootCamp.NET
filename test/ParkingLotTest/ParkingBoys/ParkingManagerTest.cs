@@ -65,7 +65,7 @@ namespace OOBootCampTest
         }
 
         [Fact]
-        public void should_park_car_when_manages_multiple()
+        public void should_park_car_when_manages_multiple_parking_lots()
         {
             var fullParkingLot = new ParkingLotBuilder()
                 .WithCapacity(1)
@@ -105,5 +105,33 @@ namespace OOBootCampTest
                 .WithMessage("Cannot find the car.");
         }
 
+        [Fact]
+        public void should_park_car_when_manages_multiple_parking_boys()
+        {
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy(parkingLot);
+            var smartParkingBoy = new SmartParkingBoy(parkingLot);
+            var parkingManager = new ParkingManager(parkingBoy, smartParkingBoy);
+            var car = new Car();
+
+            var token = parkingManager.Park(car);
+            var pickedCar = parkingManager.Pick(token);
+
+            pickedCar.Should().BeSameAs(car);
+        }
+
+        [Fact]
+        public void should_park_car_when_manages_parking_lot_and_parking_boy()
+        {
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy(parkingLot);
+            var parkingManager = new ParkingManager(parkingLot, parkingBoy);
+            var car = new Car();
+
+            var token = parkingManager.Park(car);
+            var pickedCar = parkingManager.Pick(token);
+
+            pickedCar.Should().BeSameAs(car);
+        }
     }
 }
