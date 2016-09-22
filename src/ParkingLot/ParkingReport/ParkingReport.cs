@@ -47,7 +47,10 @@ namespace OOBootCamp
 
         private static string AddPadding(ParkingReport subReport, string padding)
         {
-            return string.Join("\n", subReport.ToString().Split('\n').Select(line => padding + line));
+            return string.Join("\n",
+                subReport.ToString()
+                    .Split('\n')
+                    .Select(line => padding + line));
         }
 
         private string ToMarkdownString()
@@ -56,12 +59,16 @@ namespace OOBootCamp
             var reportText = $"{headingMark} {Role} {OccupiedParkingSpacesCount} {Capacity}";
             var orderedSubReports = SubReports
                 .OrderBy(r => r.Role == ParkingRoles.ParkingLot ? 0 : 1);
-            return orderedSubReports.Aggregate(reportText, (current, report) => current + NewLine + AddMarkdownHeading(report));
+            return orderedSubReports.Aggregate(reportText,
+                (current, report) => current + NewLine + AddMarkdownHeading(report));
         }
 
         private static string AddMarkdownHeading(ParkingReport subReport)
         {
-            return string.Join("\n", subReport.ToMarkdownString().Split('\n').Select(line => (line.StartsWith("#") ? "#" : "") + line));
+            return string.Join("\n",
+                subReport.ToMarkdownString()
+                    .Split('\n')
+                    .Select(line => (line.StartsWith("#") ? "#" : "") + line));
         }
     }
 }
