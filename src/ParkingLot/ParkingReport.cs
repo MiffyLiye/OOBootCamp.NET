@@ -11,6 +11,7 @@ namespace OOBootCamp
         private int OccupiedParkingSpacesCount { get; }
         private int Capacity { get; }
         private ReadOnlyCollection<ParkingReport> SubReports { get; }
+        private string NewLine { get; } = Environment.NewLine;
 
         public ParkingReport(string role, int occupiedParkingSpacesCount, int capacity)
         {
@@ -28,16 +29,38 @@ namespace OOBootCamp
             Capacity = SubReports.Sum(report => report.Capacity);
         }
 
+        public string ToString(string format)
+        {
+            if (format.Equals("markdown", StringComparison.OrdinalIgnoreCase))
+            {
+                return ToMarkdownString();
+            }
+            return ToString();
+        }
+
         public override string ToString()
         {
             var reportText = $"{Role} {OccupiedParkingSpacesCount} {Capacity}";
             return SubReports.Aggregate(reportText,
-                (current, report) => current + Environment.NewLine + AddPadding(report, "  "));
+                (current, report) => current + NewLine + AddPadding(report, "  "));
         }
 
         private static string AddPadding(ParkingReport subReport, string padding)
         {
             return string.Join("\n", subReport.ToString().Split('\n').Select(line => padding + line));
+        }
+
+        private string ToMarkdownString()
+        {
+            var headingMark = Role == "P" ? "*" : "#";
+            var reportText = $"{headingMark} {Role} {OccupiedParkingSpacesCount} {Capacity}";
+            var orderedSubReports = SubReports.OrderBy(r => r.Role == "P" ? 0 : 1);
+            return orderedSubReports.Aggregate(reportText, (current, report) => current + NewLine + AddMarkdownHeading(report));
+        }
+
+        private static string AddMarkdownHeading(ParkingReport subReport)
+        {
+            return string.Join("\n", subReport.ToMarkdownString().Split('\n').Select(line => (line.StartsWith("#") ? "#" : "") + line));
         }
     }
 }
