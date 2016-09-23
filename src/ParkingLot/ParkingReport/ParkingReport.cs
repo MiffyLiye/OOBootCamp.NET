@@ -40,15 +40,15 @@ namespace OOBootCamp
 
         public override string ToString()
         {
-            var reportText = $"{Role} {OccupiedParkingSpacesCount} {Capacity}";
-            return SubReports.Aggregate(reportText,
-                (current, report) => current + NewLine + AddPadding(report, "  "));
+            var summary = $"{Role} {OccupiedParkingSpacesCount} {Capacity}";
+            return SubReports.Aggregate(summary,
+                (current, subReport) => current + NewLine + AddPadding(subReport.ToString(), "  "));
         }
 
-        private static string AddPadding(ParkingReport subReport, string padding)
+        private static string AddPadding(string text, string padding)
         {
             return string.Join("\n",
-                subReport.ToString()
+                text
                     .Split('\n')
                     .Select(line => padding + line));
         }
@@ -56,17 +56,17 @@ namespace OOBootCamp
         private string ToMarkdownString()
         {
             var headingMark = Role == ParkingRoles.ParkingLot ? "*" : "#";
-            var reportText = $"{headingMark} {Role} {OccupiedParkingSpacesCount} {Capacity}";
+            var summary = $"{headingMark} {Role} {OccupiedParkingSpacesCount} {Capacity}";
             var orderedSubReports = SubReports
                 .OrderBy(r => r.Role == ParkingRoles.ParkingLot ? 0 : 1);
-            return orderedSubReports.Aggregate(reportText,
-                (current, report) => current + NewLine + AddMarkdownHeading(report));
+            return orderedSubReports.Aggregate(summary,
+                (current, subReport) => current + NewLine + AddMarkdownHeadingLevel(subReport.ToMarkdownString()));
         }
 
-        private static string AddMarkdownHeading(ParkingReport subReport)
+        private static string AddMarkdownHeadingLevel(string text)
         {
             return string.Join("\n",
-                subReport.ToMarkdownString()
+                text
                     .Split('\n')
                     .Select(line => (line.StartsWith("#") ? "#" : "") + line));
         }
