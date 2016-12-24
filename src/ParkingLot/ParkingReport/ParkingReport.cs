@@ -55,10 +55,10 @@ namespace OOBootCamp
 
         private string ToMarkdownString()
         {
-            var headingMark = Role == ParkingRoles.ParkingLot ? "*" : "#";
+            var headingMark = Role == ParkingReportRoles.ParkingLot ? "*" : "#";
             var summary = $"{headingMark} {Role} {OccupiedParkingSpacesCount} {Capacity}";
             var orderedSubReports = SubReports
-                .OrderBy(r => r.Role == ParkingRoles.ParkingLot ? 0 : 1);
+                .OrderBy(r => r.Role == ParkingReportRoles.ParkingLot ? 0 : 1);
             return orderedSubReports.Aggregate(summary,
                 (current, subReport) => current + NewLine + AddMarkdownHeadingLevel(subReport.ToMarkdownString()));
         }

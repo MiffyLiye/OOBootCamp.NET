@@ -11,9 +11,12 @@ namespace OOBootCamp
 
         protected override ParkingLot SelectParkable(ICollection<ParkingLot> parkingLots)
         {
-            return parkingLots.MaxBy(p => p.VacancyRate);
+            return parkingLots.MaxBy(p => (decimal) p.EmptySpacesCount / p.Capacity);
         }
 
-        protected override string RoleInReport => ParkingRoles.SuperParkingBoy;
+        public override void Accept(IParkableVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

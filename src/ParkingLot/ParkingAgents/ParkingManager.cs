@@ -14,6 +14,9 @@ namespace OOBootCamp
             return parkables.First(p => p.CanPark());
         }
 
-        protected override string RoleInReport => ParkingRoles.ParkingManager;
+        public override void Accept(IParkableVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

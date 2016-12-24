@@ -14,8 +14,9 @@ namespace OOBootCampTest
         public void should_report_when_manager_manages_nothing()
         {
             var parkingManager = new ParkingManager();
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            parkingManager.ParkingReport.ToString().Should().Be("M 0 0");
+            parkingDirector.ParkingReport.ToString().Should().Be("M 0 0");
         }
 
         [Fact]
@@ -26,8 +27,9 @@ namespace OOBootCampTest
                 .WithOccupiedParkingSpace(1)
                 .Create();
             var parkingManager = new ParkingManager(parkingLot);
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            parkingManager.ParkingReport.ToString().Should().Be(
+            parkingDirector.ParkingReport.ToString().Should().Be(
                 "M 1 2" + NewLine +
                 "  P 1 2");
         }
@@ -41,8 +43,9 @@ namespace OOBootCampTest
                 .Create();
             var parkingBoy = new ParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            parkingManager.ParkingReport.ToString().Should().Be(
+            parkingDirector.ParkingReport.ToString().Should().Be(
                 "M 1 2" + NewLine +
                 "  B 1 2" + NewLine +
                 "    P 1 2");
@@ -57,8 +60,9 @@ namespace OOBootCampTest
                 .Create();
             var parkingBoy = new SmartParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            parkingManager.ParkingReport.ToString().Should().Be(
+            parkingDirector.ParkingReport.ToString().Should().Be(
                 "M 1 2" + NewLine +
                 "  B 1 2" + NewLine +
                 "    P 1 2");
@@ -73,8 +77,9 @@ namespace OOBootCampTest
                 .Create();
             var parkingBoy = new SuperParkingBoy(parkingLot);
             var parkingManager = new ParkingManager(parkingBoy);
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            parkingManager.ParkingReport.ToString().Should().Be(
+            parkingDirector.ParkingReport.ToString().Should().Be(
                 "M 1 2" + NewLine +
                 "  B 1 2" + NewLine +
                 "    P 1 2");
@@ -94,8 +99,9 @@ namespace OOBootCampTest
             var superParkingBoy = new SuperParkingBoy(
                 new ParkingLotBuilder().WithCapacity(400).WithOccupiedParkingSpace(40).Create());
             var parkingManager = new ParkingManager(parkingLot, parkingBoy, smartParkingBoy, superParkingBoy);
+            var parkingDirector = new ParkingDirector(parkingManager);
 
-            var actualReportText = parkingManager.ParkingReport.ToString();
+            var actualReportText = parkingDirector.ParkingReport.ToString();
 
             actualReportText.Should().StartWith("M 100 1000");
             actualReportText.Should().Contain("  P 10 100");

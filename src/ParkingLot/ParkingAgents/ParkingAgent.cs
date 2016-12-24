@@ -6,8 +6,7 @@ namespace OOBootCamp
 {
     public abstract class ParkingAgent<TManaged> : IParkable where TManaged : IParkable
     {
-        private ICollection<TManaged> Parkables { get; }
-
+        public ICollection<TManaged> Parkables { get; }
         protected ParkingAgent(ICollection<TManaged> parkables)
         {
             Parkables = parkables;
@@ -44,15 +43,6 @@ namespace OOBootCamp
             return parkingLot.Pick(token);
         }
 
-        protected abstract string RoleInReport { get; }
-
-        public ParkingReport ParkingReport
-        {
-            get
-            {
-                var subReports = Parkables.Select(i => i.ParkingReport).ToList();
-                return new ParkingReport(RoleInReport, subReports);
-            }
-        }
+        public abstract void Accept(IParkableVisitor visitor);
     }
 }

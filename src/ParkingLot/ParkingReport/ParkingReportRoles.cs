@@ -1,6 +1,6 @@
 namespace OOBootCamp
 {
-    public class ParkingRoles
+    public class ParkingReportRoles
     {
         public static string ParkingLot { get; } = "P";
         public static string ParkingBoy { get; } = "B";

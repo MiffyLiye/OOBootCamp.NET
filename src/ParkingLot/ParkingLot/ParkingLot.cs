@@ -7,15 +7,14 @@ namespace OOBootCamp
     public class ParkingLot : IParkable
     {
         private Dictionary<string, Car> OccupiedLots { get; }
-        private int Capacity { get; }
+        public int Capacity { get; }
+        public int EmptySpacesCount => Capacity - OccupiedLots.Count;
 
         public ParkingLot(int capacity)
         {
             OccupiedLots = new Dictionary<string, Car>();
             Capacity = capacity;
         }
-
-        public decimal VacancyRate => (decimal)EmptySpacesCount / Capacity;
 
         public bool CanPark()
         {
@@ -49,7 +48,6 @@ namespace OOBootCamp
             return car;
         }
 
-        public int EmptySpacesCount => Capacity - OccupiedLots.Count;
 
         private bool HasEmptySpace()
         {
@@ -61,6 +59,9 @@ namespace OOBootCamp
             return OccupiedLots.ContainsKey(token);
         }
 
-        public ParkingReport ParkingReport => new ParkingReport(ParkingRoles.ParkingLot, Capacity - EmptySpacesCount, Capacity);
+        public void Accept(IParkableVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
