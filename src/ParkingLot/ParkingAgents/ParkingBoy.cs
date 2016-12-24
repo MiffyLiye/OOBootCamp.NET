@@ -14,9 +14,9 @@ namespace OOBootCamp
             return parkingLots.First(p => p.CanPark());
         }
 
-        public override void Accept(IParkableVisitor visitor)
+        public override object Accept(IParkableVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 }

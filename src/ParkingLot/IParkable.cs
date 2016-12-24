@@ -6,6 +6,6 @@
         string Park(Car car);
         bool CanPick(string token);
         Car Pick(string token);
-        void Accept(IParkableVisitor visitor);
+        object Accept(IParkableVisitor visitor);
     }
 }

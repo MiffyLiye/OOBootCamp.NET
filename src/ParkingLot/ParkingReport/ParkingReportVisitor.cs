@@ -1,46 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace OOBootCamp
 {
     public class ParkingReportVisitor : IParkableVisitor
     {
-        public ParkingReport ParkingReport;
-
-        public void Visit(ParkingLot parkingLot)
+        public object Visit(ParkingLot parkingLot)
         {
-            ParkingReport = new ParkingReport(ParkingReportRoles.ParkingLot,
+            return new ParkingReport(ParkingReportRoles.ParkingLot,
                 parkingLot.Capacity - parkingLot.EmptySpacesCount, parkingLot.Capacity);
         }
 
-        public void Visit(ParkingBoy parkingBoy)
+        public object Visit(ParkingBoy parkingBoy)
         {
-            Visit(parkingBoy, ParkingReportRoles.ParkingBoy);
+            return Visit(parkingBoy, ParkingReportRoles.ParkingBoy);
         }
 
-        public void Visit(SmartParkingBoy smartParkingBoy)
+        public object Visit(SmartParkingBoy smartParkingBoy)
         {
-            Visit(smartParkingBoy, ParkingReportRoles.SmartParkingBoy);
+            return Visit(smartParkingBoy, ParkingReportRoles.SmartParkingBoy);
         }
 
-        public void Visit(SuperParkingBoy superParkingBoy)
+        public object Visit(SuperParkingBoy superParkingBoy)
         {
-            Visit(superParkingBoy, ParkingReportRoles.SuperParkingBoy);
+            return Visit(superParkingBoy, ParkingReportRoles.SuperParkingBoy);
         }
 
-        public void Visit(ParkingManager parkingManager)
+        public object Visit(ParkingManager parkingManager)
         {
-            Visit(parkingManager, ParkingReportRoles.ParkingManager);
+            return Visit(parkingManager, ParkingReportRoles.ParkingManager);
         }
 
-        private void Visit<TManaged>(ParkingAgent<TManaged> parkingAgent, string role) where TManaged : IParkable
+        private object Visit<TManaged>(ParkingAgent<TManaged> parkingAgent, string role) where TManaged : IParkable
         {
-            var subReports = new List<ParkingReport>();
-            foreach (var parkable in parkingAgent.Parkables)
-            {
-                parkable.Accept(this);
-                subReports.Add(ParkingReport);
-            }
-            ParkingReport = new ParkingReport(role, subReports);
+            return new ParkingReport(role, parkingAgent.Parkables.Select(parkable => (ParkingReport) parkable.Accept(this)).ToList());
         }
     }
 }

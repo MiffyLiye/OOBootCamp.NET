@@ -14,9 +14,9 @@ namespace OOBootCamp
             return parkingLots.MaxBy(p => p.EmptySpacesCount);
         }
 
-        public override void Accept(IParkableVisitor visitor)
+        public override object Accept(IParkableVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 }

@@ -43,6 +43,6 @@ namespace OOBootCamp
             return parkingLot.Pick(token);
         }
 
-        public abstract void Accept(IParkableVisitor visitor);
+        public abstract object Accept(IParkableVisitor visitor);
     }
 }
