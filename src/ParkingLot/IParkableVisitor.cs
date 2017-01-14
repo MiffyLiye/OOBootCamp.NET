@@ -1,11 +1,11 @@
 namespace OOBootCamp
 {
-    public interface IParkableVisitor
+    public interface IParkableVisitor<out T>
     {
-        object Visit(ParkingLot parkingLot);
-        object Visit(ParkingBoy parkingBoy);
-        object Visit(SmartParkingBoy smartParkingBoy);
-        object Visit(SuperParkingBoy superParkingBoy);
-        object Visit(ParkingManager parkingManager);
+        T Visit(ParkingLot parkingLot);
+        T Visit(ParkingBoy parkingBoy);
+        T Visit(SmartParkingBoy smartParkingBoy);
+        T Visit(SuperParkingBoy superParkingBoy);
+        T Visit(ParkingManager parkingManager);
     }
 }

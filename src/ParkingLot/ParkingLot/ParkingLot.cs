@@ -59,7 +59,7 @@ namespace OOBootCamp
             return OccupiedLots.ContainsKey(token);
         }
 
-        public object Accept(IParkableVisitor visitor)
+        public T Accept<T>(IParkableVisitor<T> visitor)
         {
             return visitor.Visit(this);
         }

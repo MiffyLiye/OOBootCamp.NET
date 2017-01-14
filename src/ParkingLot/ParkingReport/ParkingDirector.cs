@@ -10,6 +10,6 @@
             this._parkingManager = parkingManager;
         }
 
-        public ParkingReport ParkingReport => (ParkingReport) _parkingManager.Accept(_parkingReportVisitor);
+        public ParkingReport ParkingReport => _parkingManager.Accept(_parkingReportVisitor);
     }
 }
